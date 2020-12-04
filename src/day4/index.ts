@@ -50,6 +50,7 @@ interface Passport {
 const linesToPassports = (lines: string[]): string[] => {
   const passports: string[] = [];
   let passport: string;
+  lines.push(''); // Add closing blank line to trigger final passport close
   lines.forEach((line:string) => {
     if (line === '') {
       passports.push(passport);
@@ -83,14 +84,14 @@ const isInvalid = (passport:Passport) => {
     if (!res) failReason = `No ${field.name}`;
     return !res;
   });
-  if (!failReason) {
-    // Passport has all required fields
-    requiredFields.some((field) => {
-      const res = field.validate(passport[field.name]);
-      if (!res) failReason = `${field.name} failed validation`;
-      return !res;
-    });
-  }
+  // if (!failReason) {
+  //   // Passport has all required fields
+  //   requiredFields.some((field) => {
+  //     const res = field.validate(passport[field.name]);
+  //     if (!res) failReason = `${field.name} failed validation`;
+  //     return !res;
+  //   });
+  // }
   return failReason;
 };
 
