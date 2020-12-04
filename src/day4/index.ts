@@ -97,4 +97,5 @@ const isInvalid = (passport:Passport) => {
 const result = linesToPassports(rows)
   .map(parse)
   .filter((p) => { const res = isInvalid(p); console.log({ res, p }); return !res; }).length;
+
 console.log(result);
