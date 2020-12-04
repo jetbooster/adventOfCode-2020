@@ -15,11 +15,11 @@ const requiredFields = [
   },
   {
     name: 'iyr',
-    validate: (item:string) => validateDate(item, 4, 1920, 2002),
+    validate: (item:string) => validateDate(item, 4, 2010, 2020),
   },
   {
     name: 'eyr',
-    validate: (item:string) => validateDate(item, 4, 1920, 2002),
+    validate: (item:string) => validateDate(item, 4, 2020, 2030),
   },
   {
     name: 'hgt',
@@ -84,14 +84,14 @@ const isInvalid = (passport:Passport) => {
     if (!res) failReason = `No ${field.name}`;
     return !res;
   });
-  // if (!failReason) {
-  //   // Passport has all required fields
-  //   requiredFields.some((field) => {
-  //     const res = field.validate(passport[field.name]);
-  //     if (!res) failReason = `${field.name} failed validation`;
-  //     return !res;
-  //   });
-  // }
+  if (!failReason) {
+    // Passport has all required fields
+    requiredFields.some((field) => {
+      const res = field.validate(passport[field.name]);
+      if (!res) failReason = `${field.name} failed validation`;
+      return !res;
+    });
+  }
   return failReason;
 };
 
