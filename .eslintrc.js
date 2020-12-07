@@ -25,5 +25,6 @@ module.exports = {
     ],
     'no-unused-vars': 0,
     '@typescript-eslint/no-unused-vars': ['error'],
+    'no-cond-assign': 0, // I know what I'm doing
   },
 };
