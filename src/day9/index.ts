@@ -37,22 +37,20 @@ const findOutlierIndex = (array:number[], preamble: number) => array.findIndex((
   return !matchesPattern(array, num, index, preamble);
 });
 
-const findContiguousSet = (array: number[], target:number, targetIndex:number) => {
+const findContiguousSet = (array: number[], target:number) => {
   let setSize = 2;
-  // From Eyeballing, no elements AFTER index 640 are less than 1309761972, and we would need two, so we only need to consider the set below
   let index = 0;
   let currentSet: number[];
   let successfulSet:number[];
-  const trimmedArray = array.slice(0, targetIndex);
   while (true) {
-    if (index + setSize > trimmedArray.length) {
+    if (index + setSize > array.length) {
       // The set overhangs the array, so cannot exist.
       // reset and try a larger set
       debug(`No sets of size ${setSize} satisfy`);
       index = 0;
       setSize += 1;
     }
-    currentSet = trimmedArray.slice(index, index + setSize);
+    currentSet = array.slice(index, index + setSize);
     if (currentSet.reduce((prev, curr) => prev + curr) === target) {
       successfulSet = currentSet;
       break;
@@ -64,7 +62,7 @@ const findContiguousSet = (array: number[], target:number, targetIndex:number) =
 
 const outlierIndex = findOutlierIndex(numbers, 25);
 
-const sumSet = findContiguousSet(numbers, numbers[outlierIndex], outlierIndex);
+const sumSet = findContiguousSet(numbers, numbers[outlierIndex]);
 
 const sortedSet = sumSet.sort((a, b) => a - b);
 const part2Answer = sortedSet[0] + sortedSet[sortedSet.length - 1];
