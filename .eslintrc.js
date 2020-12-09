@@ -26,5 +26,6 @@ module.exports = {
     'no-unused-vars': 0,
     '@typescript-eslint/no-unused-vars': ['error'],
     'no-cond-assign': 0, // I know what I'm doing
+    'no-constant-condition': 0, // The Program Halts when I say it halts - Alan Turing
   },
 };
